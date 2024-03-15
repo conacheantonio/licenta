@@ -36,31 +36,32 @@
             <p class="text-light px-5"><em>ne bucuram ca vrei sa te alaturi comunitatii noastre :)</em></p>
           </div>
 
-          <div class="row justify-content-center mt-4">
+          <div class="row justify-content-center mts-4">
             <div class="col-md-6">
                 <div class="card mt-4">
                     <div class="card-header">
                         inregistreaza-te ca cititor
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form class="submit form" method="POST" action="/register">
+                            <div id="errorContainer"></div> <!-- Add this line here -->
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputName" placeholder="nume si prenume">
+                                <input type="text" class="form-control" id="exampleInputName" placeholder="nume si prenume" name="name">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="email">
+                                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="email" name="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="exampleInputPassword" placeholder="parola">
+                                <input type="password" class="form-control" id="exampleInputPassword" placeholder="parola" name="password">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="exampleInputConfirmPassword" placeholder="confirma parola">
+                                <input type="password" class="form-control" id="exampleInputConfirmPassword" placeholder="confirma parola" name="confirmPassword">
                             </div>
                             <div class="form-group mb-2">
-                                <input type="tel" class="form-control" id="exampleInputPhoneNumber" placeholder="numar de telefon">
+                                <input type="tel" class="form-control" id="exampleInputPhoneNumber" placeholder="numar de telefon" name="phone">
                             </div>
                             <div class="form-check pb-3">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="termsAndConditions" value="checked">
                                 <label class="form-check-label" for="exampleCheck1">sunt de acord cu termenii si conditiile</label>
                             </div>
                             <button type="submit" class="btn-sm btn-secondary bg-dark">inregistrare</button>
@@ -70,6 +71,67 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Function to display errors in the DOM
+        function displayErrors(errors) {
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.innerHTML = ''; // Clear previous errors
+    
+            if (errors && errors.length > 0) {
+                const errorList = document.createElement('ul');
+                errors.forEach(function (error) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = error.message;
+                    errorList.appendChild(listItem);
+                });
+                errorContainer.appendChild(errorList);
+            }
+        }
+    
+        // Function to handle form submission and display errors
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+    
+            // Fetch form data
+            const formData = new FormData(event.target);
+    
+            // Convert formData to JSON object
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+    
+            // Send form data to the server
+            fetch('/register', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                // If registration is successful, show a pop-up message
+                alert('Registration successful! You can now login.');
+                // Redirect to the login page after a short delay
+                setTimeout(function() {
+                window.location.href = '/login';
+            }, 2000); // 2000 milliseconds delay (2 seconds)
+                } else {
+                    // If there are errors, display them
+                    displayErrors(result.errors);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    
+        // Attach form submission handler
+        document.querySelector('.submit').addEventListener('submit', handleSubmit);
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
