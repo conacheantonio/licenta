@@ -49,6 +49,28 @@ module.exports = {
                 required: true,
                 message: 'Password cannot be empty'
             }
+        },
+        forgotPassword: {
+            email: {
+                required: true,
+                type: 'email',
+                message: 'Invalid email'
+            },
+            phone: {
+                required: true,
+                len: 10,
+                message: 'Invalid Phone'
+            },
+            pin: {
+                required: true,
+                len: 4,
+                message: 'Incorrect PIN format'
+            },
+            newPassword: {
+                required: true,
+                min: 4,
+                message: 'Invalid Password'
+            }
         }   
     }
 }

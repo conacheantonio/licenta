@@ -3,7 +3,7 @@ const path = require('path')
 const mysql = require('mysql')
 const bodyParser = require('body-parser');
 const expressSession = require('express-session')
-const app = express()
+const app = express() 
 
 app.use(bodyParser.urlencoded({extended: false}))  //accepts a simple key-pair value
 app.use(bodyParser.json())
@@ -16,6 +16,9 @@ app.use(expressSession({
 const routes = require('./controllers/landing')
 const register = require('./controllers/register')
 const login = require('./controllers/login')
+const reset = require('./controllers/forgot_password')
+
+//const customer = require('./controllers/customer')
 
 // Middleware function to check if the user is authenticated
 function requireLogin(req, res, next) {
@@ -46,6 +49,9 @@ app.use(['/customer/*', '/admin/*'], requireLogin);
 app.use('/', routes)
 app.use('/', register)
 app.use('/', login)
+app.use('/', reset)
+
+//app.use('/', customer)
 
 //middlewears
 app.use('/css', express.static(__dirname + '/css'))

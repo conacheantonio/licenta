@@ -43,7 +43,7 @@
                         inregistreaza-te ca cititor
                     </div>
                     <div class="card-body">
-                        <form class="submit form" method="POST" action="/register">
+                        <form id="registerForm" class="submit form" method="POST" action="/register">
                             <div id="errorContainer"></div> <!-- Add this line here -->
                             <div class="form-group">
                                 <input type="text" class="form-control" id="exampleInputName" placeholder="nume si prenume" name="name">
@@ -61,7 +61,7 @@
                                 <input type="tel" class="form-control" id="exampleInputPhoneNumber" placeholder="numar de telefon" name="phone">
                             </div>
                             <div class="form-group mb-2">
-                                <input type="pin" class="form-control" id="exampleInputPin" placeholder="pin" name="pin">
+                                <input type="text" class="form-control" id="exampleInputPin" placeholder="pin" name="pin">
                             </div>
                             <div class="form-check pb-3">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1" name="termsAndConditions" value="checked">
@@ -119,9 +119,8 @@
                 // If registration is successful, show a pop-up message
                 alert('Registration successful! You can now login.');
                 // Redirect to the login page after a short delay
-                setTimeout(function() {
+                document.getElementById('registerForm').reset();
                 window.location.href = '/login';
-            }, 2000); // 2000 milliseconds delay (2 seconds)
                 } else {
                     // If there are errors, display them
                     displayErrors(result.errors);

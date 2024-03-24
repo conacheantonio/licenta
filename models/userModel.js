@@ -27,9 +27,24 @@ var validateUser = (email, password, callback) => {
         callback(result[0])
     })
 }
+var getUserByEmailPhoneAndPin = (email, phone, pin, callback) => {
+    var sql = "SELECT * FROM registration_list WHERE email = ? AND phone = ? AND pin = ?";
+    db.executeQuery(sql, [email, phone, pin], function(result) {
+        callback(result[0]);
+    });
+};
+
+var updatePassword = (email, newPassword, callback) => {
+    var sql = "UPDATE registration_list SET password = ? WHERE email = ?";
+    db.executeQuery(sql, [newPassword, email], function(result) {
+        callback(result);
+    });
+};
 
 module.exports = {
     validateRegister,
     createUser,
-    validateUser
+    validateUser,
+    getUserByEmailPhoneAndPin,
+    updatePassword
 }
