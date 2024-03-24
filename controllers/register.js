@@ -17,8 +17,12 @@ router.post('/register', (req, res) => {
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
         phone: req.body.phone,
+        pin: req.body.pin,
         termsAndConditions: req.body.termsAndConditions 
     };
+
+    var rules = validationRules.users.create;
+    var validator = new asyncValidator(rules);
 
     userModel.validateRegister(data, function(duplicateExists) {
         if (duplicateExists) {
@@ -29,9 +33,6 @@ router.post('/register', (req, res) => {
                 console.log('Passwords do not match')
                 return res.status(400).json({ success: false, errors: [{ message: 'Passwords do not match', field: 'confirmPassword' }] });
             }
-
-            var rules = validationRules.users.create;
-            var validator = new asyncValidator(rules);
 
             validator.validate(data, (errors, fields) => {
                 if (!errors) {

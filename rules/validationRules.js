@@ -28,10 +28,26 @@ module.exports = {
                 len: 10,
                 message: 'Invalid Phone'
             },
+            pin:{
+                required: true,
+                len: 4,
+                message: 'Incorrect pin format'
+            },
             termsAndConditions: {
                 required: true,
                 termsAndConditions: true,
                 message: 'Please agree to the terms and conditions'
+            }
+        },
+        login: {
+            email: {
+                required: true,
+                type: 'email',
+                message: 'Invalid email'
+            },
+            password: {
+                required: true,
+                message: 'Password cannot be empty'
             }
         }   
     }

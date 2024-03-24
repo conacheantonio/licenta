@@ -43,7 +43,8 @@
                     </div>
                     <div class="card-body">
                         <!-- Your customer login form goes here -->
-                        <form>
+                        <form id="userLoginForm" action="/userlogin" method="POST">
+                            <div id="loginErrorContainer"></div>
                             <div class="form-group">
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email" name="email">
                               </div>
@@ -68,16 +69,17 @@
                     </div>
                     <div class="card-body">
                         <!-- Your admin login form goes here -->
-                        <form>
+                        <form id="adminLoginForm" action="/adminlogin" method="POST">
+                            <div id="adminLoginErrorContainer"></div>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="email">
+                                <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="email" name="admin_email">
                               </div>
                               <div class="form-group mb-0">
-                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="parola">
+                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="parola" name="admin_password">
                               </div>
                             <!-- Form fields go here -->
                             <div class="pb-2 mt-1">
-                                <a class="small text-dark" href="#">am uitat parola</a>
+                                <a class="small text-dark" href="./forgot_password">am uitat parola</a>
                             </div>
                             <button type="submit" class=" btn-sm btn-secondary bg-dark">conectare</button>
                         </form>
@@ -86,7 +88,82 @@
             </div>
         </div>
     </div>   
+    <script>
+        // Function to handle form submission and display errors
+        function handleLoginForm(event, endpoint, errorContainerId){
+            event.preventDefault(); // Prevent default form submission
 
+            //Fetch form data
+            const formData = new FormData(event.target);
+
+            //convert formData to JSON object
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            //Send form data to the server
+            fetch(endpoint, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if(result.success) {
+                     //If login is successful, redirect to the home page or the specified redirect URL
+                    if (result.redirect) {
+                        window.location.href = result.redirect;
+                    } else {
+                        window.location.href = '/'
+                    }
+                } else {
+                    // If there are errors, display them
+                    if(result.message){
+                        // Display the error message for invalid email or password
+                        displayErrors([{message: result.message}], errorContainerId);
+                    } else if (result.errors) {
+                        // Display other validation errors, if any
+                        displayErrors(result.errors, errorContainerId);
+                    }  
+                } 
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+        }
+
+        // Function to display errors in the DOM
+        function displayErrors(errors, errorContainerId) {
+        const errorContainer = document.getElementById(errorContainerId);
+        errorContainer.innerHTML = ''; // Clear previous errors
+
+        if (errors && errors.length > 0) {
+            const errorList = document.createElement('ul');
+            errors.forEach(function (error) {
+                const listItem = document.createElement('li');
+                listItem.textContent = error.message;
+                errorList.appendChild(listItem);
+            });
+            errorContainer.appendChild(errorList);
+            errorContainer.style.display = 'block';
+        } else {
+            errorContainer.style.display = 'none';
+        }
+    }
+
+    
+        // Attach form submission handlers for both login forms
+        document.getElementById('userLoginForm').addEventListener('submit', function(event) {
+            handleLoginForm(event, '/userlogin', 'loginErrorContainer');
+        });
+
+        document.getElementById('adminLoginForm').addEventListener('submit', function(event) {
+            handleLoginForm(event, '/adminlogin', 'adminLoginErrorContainer');
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

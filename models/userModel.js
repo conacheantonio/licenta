@@ -15,13 +15,21 @@ var validateRegister = (user, callback) => {
 }
 
 var createUser = (user, callback) => {
-    var sql = "INSERT INTO registration_list (name, email, password, phone) VALUES (?, ?, ?, ?)"
-    db.executeQuery(sql, [user.name, user.email, user.password, user.phone], function(result) {
+    var sql = "INSERT INTO registration_list (name, email, password, phone, pin) VALUES (?, ?, ?, ?, ?)"
+    db.executeQuery(sql, [user.name, user.email, user.password, user.phone, user.pin], function(result) {
       callback(result);  
+    })
+}
+
+var validateUser = (email, password, callback) => {
+    var sql = "SELECT * FROM registration_list WHERE email = ? AND password = ?"
+    db.executeQuery(sql, [email, password], function(result) {
+        callback(result[0])
     })
 }
 
 module.exports = {
     validateRegister,
-    createUser
+    createUser,
+    validateUser
 }
