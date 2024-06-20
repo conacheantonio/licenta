@@ -1,0 +1,156 @@
+@font-face {
+    font-family: "AnekBangla";
+    src: url("/public/AnekBangla.ttf") format("truetype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: AnekBangla;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F4F4F4;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+h1 {
+    margin-top: -30px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    text-align: center;
+}
+
+.table-head-row {
+    display: none;
+    background-color: #c0dde2;
+}
+
+.table-head-col {
+    display: block;
+    background-color: #c0dde2;
+}
+
+.books-logo {
+    display: block;
+    margin: 30px auto;
+    width: 150px;
+}
+
+@media screen and (min-width: 1180px) {
+    .table-head-row {
+        display: block;
+    }
+
+    .table-head-col {
+        display: none;
+    }
+}
+
+
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 40px;
+    margin-bottom: 60px;
+}
+
+form input, form label {
+    width: 90%;
+    margin: auto;
+    font-size: 20px;
+}
+
+form label {
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+form input {
+    text-indent: 10px;
+    border-radius: 3px;
+    border: 1px solid #444444;
+    filter: drop-shadow(0 4px 4px #00000040);
+    height: 42px;
+}
+
+form button[type="button"] {
+    all: unset;
+    margin-left: 5%;
+    margin-top: 8px;
+    text-decoration: underline;
+}
+
+form button[type="button"]:hover {
+    color: #1D9AAE;
+}
+
+form button[type="submit"] {
+    border: none;
+    border-radius: 3px;
+    background-color: #1D9AAE;
+    width: 155px;
+    height: 42px;
+    margin: auto;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: 50px;
+    filter: drop-shadow(0 4px 4px #00000040);
+}
+
+form p {
+    margin-top: 30px;
+}
+
+form p button[type="button"] {
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.status-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.status-page img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+@media screen and (min-width: 620px) {
+    form {
+        background-color: #FFFFFF;
+        width: 560px;
+        min-height: 440px;
+        margin: auto;
+        filter: drop-shadow(0 4px 6px #0000005E);
+        border-radius: 3px;
+        padding-bottom: 45px;
+        margin-bottom: 30px;
+    }
+}

@@ -1,0 +1,97 @@
+.book-reader-format-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 10px 0;
+}
+
+.book-reader-format-container > div {
+    width: 80%;
+}
+
+.book-reader-format-container .main-info-container {
+    margin: auto;
+    aspect-ratio: 0.9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px auto;
+    color: #000000;
+    background-image: url('/public/book-bg.png');
+    background-position: cover;
+    background-repeat: no-repeat;
+}
+
+.book-reader-format-container .main-info-container .title {
+    font-size: 26px;
+    line-height: 30px;
+    margin-left: 25px;
+    width: 60%;
+    margin-top: 30px;
+    font-weight: 500;
+    flex: 1;
+}
+
+.book-reader-format-container .main-info-container .author {
+    font-size: 16px;
+    margin-left: 25px;
+    width: 80%;
+    margin-top: 12px;
+    flex: 2;
+}
+
+.book-details {
+    background-color: #FFFFFF;
+    width: 170px;
+    margin: -30px auto 0;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.genre {
+    background-color: #D9D9D9;
+    border-radius: 3px;
+    font-weight: bold;
+    width: fit-content;
+    margin: 5px auto;
+    padding: 0 5px;
+}
+
+.book-reader-format-container button {
+    border: none;
+    border-radius: 3px;
+    background-color: #1D9AAE;
+    height: 42px;
+    margin-right: 20px;
+    color: #FFFFFF;
+    font-size: 16px;
+    filter: drop-shadow(0 4px 4px #00000040);
+    width: fit-content;
+    padding: 3px 12px;
+    margin: 15px auto;
+}
+
+.book-reader-format-container button.selected {
+    color: #000000;
+    background-color: #E4C6A1A3;
+
+}
+
+.book-reader-format-container button:disabled {
+    background-color: grey;
+    opacity: 0.2;
+}
+
+.sorry-p {
+    color: #ff7000;
+    font-size: 14px;
+    line-height: 13px;
+    position: absolute;
+    bottom: -17px;
+    font-weight: bold;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}

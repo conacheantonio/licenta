@@ -1,0 +1,36 @@
+.not-found-page {
+    background-color: #2F3348;
+    flex: 1;
+    color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-found-page img {
+    width: 80%;
+}
+
+.not-found-page .status-code {
+    font-size: 100px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.not-found-page a {
+    color: #FFFFFF;
+}
+
+.not-found-page a:hover {
+    color: #1D9AAE;
+}
+
+@media screen and (min-width: 620px) {
+    .not-found-page img {
+        max-width: 470px;
+        max-height: 250px;
+    }
+}

@@ -1,0 +1,78 @@
+.orders-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.orders-container button {
+    border: none;
+    border-radius: 3px;
+    background-color: #1D9AAE;
+    width: 10ch;
+    height: 30px;
+    margin: 2px;
+    color: #FFFFFF;
+    font-size: 16px;
+    filter: drop-shadow(0 4px 4px #00000040);
+}
+
+.orders-container span:nth-child(odd) {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.orders-container span:nth-child(even) {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.table-content-even.processing, .table-content-odd.processing {
+    font-weight: bold;
+}
+
+@media screen and (min-width: 1180px) {
+    .orders-container  hr {
+        display: none;
+    }
+
+    .orders-container span:nth-child(odd), .orders-container span:nth-child(even) {
+        text-align: center;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .table-content-even, .table-content-odd {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 15px;
+        padding: 5px;
+    }
+
+    .table-content-odd {
+        background-color: rgb(249, 252, 255);
+    }
+
+    .table-content-even {
+        background-color: rgb(224, 228, 232);
+    }
+
+    .orders-container {
+        width: 90%;
+        margin: 20px auto;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: min-content;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .orders-container-admin {
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    .orders-container span {
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+}
