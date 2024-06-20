@@ -1,0 +1,11 @@
+.custom-max-width{
+    max-width: 900px;
+}
+
+.card{
+    box-shadow: none;
+}
+
+.card-header{
+    border: 0;
+}
