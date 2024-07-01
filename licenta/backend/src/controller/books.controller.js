@@ -20,7 +20,6 @@ booksController.get('/', verifyUserAuthenticated, async (req, res) => {
     res.json({ message: books }) // try catch
 })
 
-// ====== admin only
 // add new book
 booksController.post('/', verifyAdmin, async (req, res) => {
     const { ISBN, title, author, description, year, pages, genre } = req?.body
